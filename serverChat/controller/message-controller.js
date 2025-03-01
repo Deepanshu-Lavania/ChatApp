@@ -1,7 +1,7 @@
-const { default: mongoose } = require("mongoose");
-const Conversation = require("../models/conversational-model");
-const Message = require("../models/message-model");
-const { getReceiverSocketId, io } = require("../SocketIO/socket");
+import mongoose from "mongoose";
+import Conversation from "../models/conversational-model.js";
+import Message from "../models/message-model.js";
+import { getReceiverSocketId, io } from "../SocketIO/socket.js";
 
 const SendMessage = async (req, res) => {
   try {
@@ -67,7 +67,6 @@ const SendMessage = async (req, res) => {
   }
 };
 
-
 const getMessage = async (req, res) => {
   try {
     const chatUser = req.params.id.trim();
@@ -83,24 +82,22 @@ const getMessage = async (req, res) => {
       !mongoose.Types.ObjectId.isValid(senderId)
     ) {
       console.log("Invalid participant ID(s)");
-
       return res.status(400).json({ message: "Invalid participant ID(s)" });
     }
 
     let conversation = await Conversation.findOne({
       participants: { $all: [senderId, chatUser] },
     }).populate("messages");
-    //"Populate method" is used to combine two fileds of same model and The populate method in Mongoose is used to replace the references (in this case, the ObjectId values stored in the messages array) with the actual data from the referenced Message documents. This is especially helpful when you need detailed information about the related documents, not just their IDs.
+    
     if (!conversation) {
       return res.status(201).json([]);
     }
-    const Messages = conversation.messages; //conversation model messages
+    const Messages = conversation.messages;
     res.status(201).json(Messages);
   } catch (error) {
     console.log("Error in getting message " + error);
-    res
-      .status(500)
-      .json({ message: "Internal server error during getting message" });
+    res.status(500).json({ message: "Internal server error during getting message" });
   }
 };
-module.exports = { SendMessage, getMessage };
+
+export { SendMessage, getMessage };

@@ -1,12 +1,12 @@
-const express = require("express");
-const routerLogic = require("../controller/user-controller");
-const authorisedMiddleware = require("../middleware/authorisedMiddleware");
+import express from "express";
+import { Signup, Login, Logout, getUserProfile } from "../controller/user-controller.js";
+import authorisedMiddleware from "../middleware/authorisedMiddleware.js";
 
 const router = express.Router();
 
-router.post("/signup",routerLogic.Signup);
-router.post("/login",routerLogic.Login);
-router.post("/logout",routerLogic.Logout);
-router.get("/getalluser",authorisedMiddleware,routerLogic.getUserProfile);
+router.post("/signup", Signup);
+router.post("/login", Login);
+router.post("/logout", Logout);
+router.get("/getalluser", authorisedMiddleware, getUserProfile);
 
-module.exports = router;
+export default router;

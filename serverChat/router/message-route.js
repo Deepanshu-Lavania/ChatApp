@@ -1,10 +1,10 @@
-const express = require("express");
-const messageController = require("../controller/message-controller");
-const authorisedMiddleware = require("../middleware/authorisedMiddleware");
+import express from "express";
+import { SendMessage, getMessage } from "../controller/message-controller.js"; 
+import authorisedMiddleware from "../middleware/authorisedMiddleware.js";
 
 const router = express.Router();
 
-router.post("/send/:id",authorisedMiddleware,messageController.SendMessage);
-router.get("/get/:id",authorisedMiddleware,messageController.getMessage);
+router.post("/send/:id", authorisedMiddleware, SendMessage);
+router.get("/get/:id", authorisedMiddleware, getMessage);
 
-module.exports =router;
+export default router;

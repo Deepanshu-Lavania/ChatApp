@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
+import jsonwebtoken from "jsonwebtoken";
 
 const createToken = (userId, res) => {
-  const token = jwt.sign({ userId }, process.env.JWT_TOKEN, {
+  const token = jsonwebtoken.sign({ userId }, process.env.JWT_TOKEN, {
     expiresIn: "30d",
   });
 
@@ -12,4 +12,5 @@ const createToken = (userId, res) => {
     maxAge: 1 * 24 * 60 * 60 * 1000,
   });
 };
-module.exports = createToken;
+
+export default createToken;

@@ -2,6 +2,7 @@
   "name": "serverchat",
   "version": "1.0.0",
   "main": "server.js",
+  "type":"module",
   "scripts": {
     "dev": "nodemon serverChat/server.js",
     "build": "npm install && npm install --prefix clientChat && npm run build --prefix clientChat",

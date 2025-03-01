@@ -1,15 +1,15 @@
-require("dotenv").config();
-const express = require("express");
-const connectDb = require("./utils/db");
-const userRoute = require("./router/user-route");
-const messageRoute = require("./router/message-route");
-const cookieParser = require("cookie-parser");
-// const path = require("path");
-const cors = require("cors");
-const { app, server } = require("./SocketIO/socket"); // Import app and server
-const path = require("path");
+// 
+import "dotenv/config";
+import express from "express";
+import connectDb from "./utils/db.js";
+import userRoute from "./router/user-route.js";
+import messageRoute from "./router/message-route.js";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import path from "path";
+import { app, server } from "./SocketIO/socket.js"; // Import app and server
 
-const _dirname = path.resolve(); 
+const __dirname = path.resolve();
 
 // Middleware setup
 app.use(cookieParser());
@@ -24,10 +24,10 @@ const port = process.env.PORT || 8000;
 
 // <------------------ code for deployment -------------> //
 
-app.use(express.static(path.join(_dirname, "/clientChat/dist")));
-app.get("*",(_,res)=>{
-  res.sendFile(path.resolve(_dirname, "clientChat","dist","index.html"));
-})
+app.use(express.static(path.join(__dirname, "/clientChat/dist")));
+app.get("*", (_, res) => {
+  res.sendFile(path.resolve(__dirname, "clientChat", "dist", "index.html"));
+});
 
 // Connect to DB and start the server
 connectDb().then(() => {
