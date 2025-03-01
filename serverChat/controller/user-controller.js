@@ -8,6 +8,7 @@ const Signup = async (req, res) => {
     if (password != confirmpassword) {
       return res.status(400).json({ message: "Match the confirm Password" });
     }
+    
     const user = await User.findOne({ email: email });
     if (user) {
       return res.status(400).json({ message: "Email already Exists" });
@@ -48,7 +49,6 @@ const Login = async (req, res) => {
     if (typeof password !== "string") {
       return res.status(400).json({ message: "Password must be a string" });
     }
-    
     // Find user by email
     const user = await User.findOne({ email });
     
