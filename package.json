@@ -5,8 +5,8 @@
   "type":"module",
   "scripts": {
     "dev": "nodemon serverChat/server.js",
-    "build": "npm install && npm install --prefix clientChat && npm run build --prefix clientChat",
-    "start": "nodemon serverChat/server.js"
+    "build": "npm install --prefix serverChat && bun install --prefix clientChat && bun run build --prefix clientChat",
+    "start": "node serverChat/server.js"
   },
   "keywords": [],
   "author": "",
