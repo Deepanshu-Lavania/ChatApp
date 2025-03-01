@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import LeftSide from "./home/left/LeftSide";
 import RightSide from "./home/right/RightSide";
 import Logout from "./home/left/left1/Logout";
-import Signup from "./components/signup";
+import Signup from "./components/Signup";
 import Login from "./components/Login";
 import { useAuth } from "./context/AuthProvider";
 import { Routes, Route, Navigate } from "react-router-dom";
